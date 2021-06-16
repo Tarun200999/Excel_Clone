@@ -1,61 +1,122 @@
-body {
-	margin: 0;
-	overflow: hidden;
-	font-size: 16px;
-}
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  overflow: hidden;
+  font-size: 16px;
+}
+
+/* MAIN CONTAINER*/
+
 .container {
-	height: 100vh;
-	border: 2px solid red;
+  height: 100vh;
 }
+
+/* TITLE BAR */
+
 .title_bar {
-	height: 5vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: #107c41;
-	color: white;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #107c41;
+  color: white;
 }
+
+/* MENU BAR */
+
 .menu_bar {
-	height: 5vh;
-	background-color: #107c41;
-	display: flex;
+  height: 5vh;
+  background-color: #107c41;
+  display: flex;
 }
 .menu_item {
-	padding-right: 10px;
-	padding-left: 10px;
-	color: white;
-	display: flex;
-	align-items: center;
-	font-size: 18px;
+  padding-right: 10px;
+  padding-left: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
 }
 .menu_item.selected {
-	color: #107c41;
-	background-color: #fff;
+  color: #107c41;
+  background-color: #fff;
 }
 .menu_item:hover {
-	background-color: #105c41;
-	cursor: pointer;
+  background-color: #105c41;
+  cursor: pointer;
 }
 .menu_item.selected:hover {
-	background-color: #fff;
-	color: #107c41;
+  background-color: #fff;
+  color: #107c41;
 }
+/*MENU BAR ICONS */
 .menu_icon_bar {
-	height: 6vh;
+  background-color: rgb(240, 235, 235);
+  height: 6vh;
+  display: flex;
+  align-items: center;
 }
+
+.menu-icon {
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex !important;
+  align-items: center;
+  height: 100%;
+}
+
+.menu-icon:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+.selector {
+  height: 30px;
+  font-size: 18px;
+  width: 150px;
+}
+
+/* FORMULA BAR */
+
 .formula_bar {
-	height: 6vh;
-	border: 2px solid purple;
+  height: 6vh;
 }
+
+/* DATA CONTAINER FOR THE CELLS */
+
 .data_container {
-	height: 74vh;
-	border: 2px solid yellow;
+  height: 74vh;
 }
+
+/* SHEET BAR CSS */
 .sheet_bar {
-	height: 6vh;
-	border: 2px solid lightblue;
+  height: 4vh;
+  display: flex;
+  align-items: center;
+}
+
+.scroller {
+  width: 70px;
+}
+.icon-left-scroll,
+.icon-right-scroll {
+  font-size: 30px;
+}
+.icon-add {
+  color: green;
+  width: 40px;
+}
+.sheet_tab_container {
+  border: 1px solid lightgray;
+  width: calc(100vw-110px);
+}
+.sheet_tab {
+  border-bottom: 4px solid green;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 70px;
+  align-items: ce;
 }

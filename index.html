@@ -3,10 +3,11 @@
 	<head>
 		<meta charset="utf-8" />
 		<link href="index.css" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<title>Excel Clone</title>
 	</head>
 
-	<!--  last Time 42:26 EXCEL PART 1 -->
+	<!--  last Time 1:15:25 EXCEL PART 1 -->
 	<body>
 		<div class="container">
 			<div class="title_bar">Book 1 Excel</div>
@@ -17,14 +18,57 @@
 				<div class="menu_layout menu_item">Layout</div>
 				<div class="menu_help menu_item">Help</div>
 			</div>
-			<div class="menu_icon_bar"></div>
+			<div class="menu_icon_bar">
+				<div class="material-icons menu-icon icon-cut">content_cut</div>
+				<div class="material-icons menu-icon icon-copy">content_copy</div>
+				<div class="material-icons menu-icon icon-paste">content_paste</div>
+				<select class="selector font_family_selector">
+					<option value="hello">Hello1</option>
+					<option value="hello2">Hello2</option>
+					<option value="hello3">Hello3</option>
+				</select>
+				<select class="selector font_size_selector">
+					<option value="10">10</option>
+					<option value="10">12</option>
+					<option value="10">14</option>
+					<option value="10">16</option>
+					<option value="10">18</option>
+					<option value="10">20</option>
+					<option value="10">22</option>
+					<option value="10">24</option>
+					<option value="10">26</option>
+					<option value="10">30</option>
+					<option value="10">32</option>
+					<option value="10">33</option>
+					<option value="10">34</option>
+					<option value="10">36</option>
+					<option value="10">40</option>
+				</select>
+				<div class="material-icons menu-icon icon-bold">format_bold</div>
+				<div class="material-icons menu-icon icon-italic">format_italic</div>
+				<div class="material-icons menu-icon icon-underline">format_underline</div>
+				<div class="material-icons menu-icon icon-align-left">format_align_left</div>
+				<div class="material-icons menu-icon icon-align-center">format_align_center</div>
+				<div class="material-icons menu-icon icon-align-right">format_align_right</div>
+				<div class="material-icons menu-icon icon-color-fill">format_color_fill</div>
+				<div class="material-icons menu-icon icon-color-text">format_color_text</div>
+			</div>
 			<div class="formula_bar"></div>
 			<div class="data_container">
 				<div class="column_name_container"></div>
 				<div class="row_name_container"></div>
 				<div class="input_container"></div>
 			</div>
-			<div class="sheet_bar"></div>
+			<div class="sheet_bar">
+               <div class="scroller">
+				   <div class="material-icons icon-left-scroll">arrow_left</div>
+				   <div class="material-icons icon-right-scroll">arrow_right</div>
+			   </div>
+			   <div class="material-icons icon-add">add_circle</div>
+			   <div class="sheet_tab_container">
+                    <div class="sheet_tab">Sheet-1</div>
+			   </div>
+			</div>
 		</div>
 	</body>
 </html>
