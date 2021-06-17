@@ -89,6 +89,59 @@ body {
 
 .data_container {
   height: 74vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+.select_all {
+  width: 30px;
+  height: 30px;
+  border: 1px solid lightgray;
+}
+
+.row_name_container {
+  width: 30px;
+  height: calc(74vh - 30px);
+  border: 1px solid lightgray;
+}
+
+.row_name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  border-bottom: 1px solid lightgray;
+}
+
+.column_name_container {
+  height: 30px;
+  width: calc(100vw - 30px);
+  border: 1px solid lightgray;
+  display: flex;
+  align-items: center;
+}
+.column_name {
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid lightgray;
+  font-weight: "bold";
+  height: 100%;
+}
+
+.input_container {
+  width: calc(100vw - 30px);
+  height: calc(74vh - 30px);
+  border: 1px solid lightgray;
+}
+.cell_row {
+  display: flex;
+}
+.input_cell {
+  width: 100px;
+  height: 25px;
+  border-right: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
 }
 
 /* SHEET BAR CSS */
@@ -105,18 +158,36 @@ body {
 .icon-right-scroll {
   font-size: 30px;
 }
+.icon-left-scroll:hover,
+.icon-right-scroll:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
 .icon-add {
   color: green;
   width: 40px;
 }
+.icon-add:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
 .sheet_tab_container {
   border: 1px solid lightgray;
-  width: calc(100vw-110px);
+  width: calc(100vw - 110px);
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 .sheet_tab {
-  border-bottom: 4px solid green;
+  border-bottom: 3px solid green;
   padding-right: 10px;
+  margin-left: 8px;
   padding-left: 10px;
-  width: 70px;
-  align-items: ce;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+}
+.sheet_tab:hover {
+  cursor: default;
 }
