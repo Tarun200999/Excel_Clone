@@ -83,6 +83,29 @@ body {
 
 .formula_bar {
   height: 6vh;
+  display: flex;
+  align-items: center;
+  padding-right: 0.7rem;
+  padding-left: 0.7rem;
+  background-color: rgb(240, 235, 235);
+}
+.formula_editor {
+  height: 70%;
+  border: 1px solid lightgray;
+  background-color: white;
+  padding-right: 0.7rem;
+  padding-left: 0.7rem;
+  display: flex;
+}
+.selected_cell {
+  width: 120px;
+}
+.formula_sign {
+  width: 40px;
+}
+.formula_input {
+  width: calc(100vw - 160px);
+  outline-color: #107c41;
 }
 
 /* DATA CONTAINER FOR THE CELLS */
@@ -98,10 +121,12 @@ body {
   border: 1px solid lightgray;
 }
 
+/*Row name */
 .row_name_container {
   width: 30px;
   height: calc(74vh - 30px);
   border: 1px solid lightgray;
+  overflow: hidden;
 }
 
 .row_name {
@@ -112,6 +137,8 @@ body {
   border-bottom: 1px solid lightgray;
 }
 
+/*Coulumn Name*/
+
 .column_name_container {
   height: 30px;
   width: calc(100vw - 30px);
@@ -120,7 +147,7 @@ body {
   align-items: center;
 }
 .column_name {
-  width: 100px;
+  min-width: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,19 +156,23 @@ body {
   height: 100%;
 }
 
+/*Input Container*/
+
 .input_container {
   width: calc(100vw - 30px);
   height: calc(74vh - 30px);
   border: 1px solid lightgray;
+  overflow: hidden;
 }
 .cell_row {
   display: flex;
 }
 .input_cell {
-  width: 100px;
-  height: 25px;
+  min-width: 100px;
+  min-height: 25px;
   border-right: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
+  outline-color: #107c41;
 }
 
 /* SHEET BAR CSS */
@@ -190,4 +221,10 @@ body {
 }
 .sheet_tab:hover {
   cursor: default;
+}
+
+/* SELECTED CLASSES ON Items*/
+
+.menu-icon.selected {
+  background-color: lightgray;
 }
