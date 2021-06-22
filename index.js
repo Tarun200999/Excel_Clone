@@ -25,20 +25,28 @@ $(document).ready(() => {
     for (let j = 1; j <= 100; j++) {
       let colCod = $(`.colID-${j}`).attr("id").split("-")[1];
       row.append(
-        `<div class="input_cell row-${i}-col-${j}" contenteditable="true" data="colCod-${colCod}"></div>`
+        `<div class="input-cell row-${i}-col-${j}" contenteditable="true" data="colCod-${colCod}"></div>`
       );
     }
     $(".input_container").append(row);
   }
 
-  //SELECTED item
-
-  $(".menu-icon.align-icon").click(() => {
+  //SELECTED in menu bar
+  $(".menu-icon.align-icon").click(function () {
     $(".menu-icon.align-icon.selected").removeClass("selected"); //Removing class form the div which already have
     $(this).addClass("selected"); //Adding class of to the clicked align icon
   });
 
   $(".style-icon").click(function () {
     $(this).toggleClass("selected");
+  });
+
+  //Selected Input cell
+
+  $(".input-cell").click(function () {
+    console.log("I am clicked");
+
+    $(".input-cell.selected").removeClass("selected");
+    $(this).addClass("selected");
   });
 });

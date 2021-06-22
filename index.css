@@ -52,6 +52,7 @@ body {
   background-color: #fff;
   color: #107c41;
 }
+
 /*MENU BAR ICONS */
 .menu_icon_bar {
   background-color: rgb(240, 235, 235);
@@ -79,6 +80,10 @@ body {
   width: 150px;
 }
 
+.menu-icon.selected {
+  background-color: lightgray;
+}
+
 /* FORMULA BAR */
 
 .formula_bar {
@@ -96,6 +101,7 @@ body {
   padding-right: 0.7rem;
   padding-left: 0.7rem;
   display: flex;
+  align-items: center;
 }
 .selected_cell {
   width: 120px;
@@ -167,12 +173,16 @@ body {
 .cell_row {
   display: flex;
 }
-.input_cell {
+.input-cell {
   min-width: 100px;
   min-height: 25px;
   border-right: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
   outline-color: #107c41;
+}
+
+.input-cell.selected {
+  border: 2px solid #107c41;
 }
 
 /* SHEET BAR CSS */
@@ -224,7 +234,3 @@ body {
 }
 
 /* SELECTED CLASSES ON Items*/
-
-.menu-icon.selected {
-  background-color: lightgray;
-}
