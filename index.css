@@ -186,6 +186,21 @@ body {
   border: 2px solid #107c41;
 }
 
+/* Multiple Cell selected CSS
+      ---------------------*/
+.input_cell.top_cell_selected {
+  border-top: none;
+}
+.input_cell.bottom_cell_selected {
+  border-bottom: 1px solid lightgray;
+}
+.input_cell.left_cell_selected {
+  border-left: none;
+}
+.input_cell.right_cell_selected {
+  border-right: 1px solid lightgray;
+}
+
 /* SHEET BAR CSS */
 .sheet_bar {
   height: 4vh;
