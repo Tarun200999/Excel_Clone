@@ -111,9 +111,13 @@ $(document).ready(() => {
   //Making cell selectable on DOUBLE click
   $(".input_cell").dblclick(function () {
     console.log("Double clicked");
-
     $(this).attr("contenteditable", "true");
     $(this).focus();
+  });
+
+  //Bluring input cell
+  $(".input_cell").blur(function () {
+    $(".input_cell.selected").attr("contenteditable", "false");
   });
 
   //Making column and row scrabble with input container scroll
@@ -126,6 +130,15 @@ $(document).ready(() => {
 
     //interisting thing i have learnt today
   });
+
+  //Applying Text property , bold , italic, underline
+  $(".icon-bold").click(function () {
+    if ($(this).hasClass("selected")) {
+      update_cell("font-weight", "bold");
+    } else {
+      update_cell("font-weight", "");
+    }
+  });
 });
 
 //Utility Functions
@@ -135,4 +148,11 @@ function clicked_row_col(cell) {
   let rowID = parseInt(cellInfo[1]);
   let colID = parseInt(cellInfo[3]);
   return [rowID, colID];
+}
+
+function update_cell(property, value) {
+  //each
+  $(".input_cell.selected").each(function () {
+    $(this).css(property, value);
+  });
 }
