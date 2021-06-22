@@ -151,6 +151,7 @@ body {
   border: 1px solid lightgray;
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 .column_name {
   min-width: 100px;
@@ -168,12 +169,12 @@ body {
   width: calc(100vw - 30px);
   height: calc(74vh - 30px);
   border: 1px solid lightgray;
-  overflow: hidden;
+  overflow: scroll;
 }
 .cell_row {
   display: flex;
 }
-.input-cell {
+.input_cell {
   min-width: 100px;
   min-height: 25px;
   border-right: 1px solid lightgray;
@@ -181,7 +182,7 @@ body {
   outline-color: #107c41;
 }
 
-.input-cell.selected {
+.input_cell.selected {
   border: 2px solid #107c41;
 }
 
