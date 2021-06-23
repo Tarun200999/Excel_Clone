@@ -1,3 +1,46 @@
+//Default properties that each cell has
+
+let defaultProperties = {
+  text: "",
+  "font-family": "Noto Sans",
+  "font-weight": "",
+  "text-decoration": "",
+  "text-align": "left",
+  "background-color": "white",
+  color: "black",
+  "font-size": 14,
+};
+//Global Object for storing cell of each sheet
+
+/*  Object is defined as 
+
+   cellData={
+     sheet1:{
+          row1:{
+            col1:{
+               properties of cell 
+            },
+            col2:{
+
+            }
+          },
+          row2:{
+
+          }
+     },
+     sheet2:{
+
+     }
+   }
+
+*/
+let cellData = {
+  Sheet1: {},
+};
+
+let selectedSheet = "Sheet1";
+let totalSheets = 1;
+
 //Using Jquery for Dealing with DOM
 
 $(document).ready(() => {
@@ -108,14 +151,14 @@ $(document).ready(() => {
     }
   });
 
-  //Making cell selectable on DOUBLE click
+  //Making cell editable on DOUBLE click
   $(".input_cell").dblclick(function () {
     console.log("Double clicked");
     $(this).attr("contenteditable", "true");
     $(this).focus();
   });
 
-  //Bluring input cell
+  //Making cell unselectable when focus gone
   $(".input_cell").blur(function () {
     $(".input_cell.selected").attr("contenteditable", "false");
   });
@@ -134,27 +177,44 @@ $(document).ready(() => {
   //Applying Bold Property
   $(".icon-bold").click(function () {
     if ($(this).hasClass("selected")) {
-      update_cell("font-weight", "bold");
+      update_cell("font-weight", "bold", false);
     } else {
-      update_cell("font-weight", "");
+      update_cell("font-weight", "", true);
     }
   });
 
   //Applying Italic Property
   $(".icon-italic").click(function () {
     if ($(this).hasClass("selected")) {
-      update_cell("font-style", "italic");
+      update_cell("font-style", "italic", false);
     } else {
-      update_cell("font-style", "");
+      update_cell("font-style", "", true);
     }
   });
-
   //Applying Underline Property
   $(".icon-underline").click(function () {
     if ($(this).hasClass("selected")) {
-      update_cell("text-decoration", "underline");
+      update_cell("text-decoration", "underline", false);
     } else {
-      update_cell("text-decoration", "");
+      update_cell("text-decoration", "", true);
+    }
+  });
+  //Applying left align Property
+  $(".icon-align-left").click(function () {
+    if ($(this).hasClass("selected")) {
+      update_cell("text-align", "left", true);
+    }
+  });
+  //Applying Underline Property
+  $(".icon-align-center").click(function () {
+    if ($(this).hasClass("selected")) {
+      update_cell("text-align", "center", false);
+    }
+  });
+  //Applying Underline Property
+  $(".icon-align-right").click(function () {
+    if ($(this).hasClass("selected")) {
+      update_cell("text-align", "right", false);
     }
   });
 });
@@ -168,9 +228,37 @@ function clicked_row_col(cell) {
   return [rowID, colID];
 }
 
-function update_cell(property, value) {
+function update_cell(property, value, canbeDefault) {
   //each
   $(".input_cell.selected").each(function () {
     $(this).css(property, value);
+
+    //Adding only that which are not defaults in Cell Data
+    let [rowID, colID] = clicked_row_col(this);
+    if (cellData[selectedSheet][rowID]) {
+      if (cellData[selectedSheet][rowID][colID]) {
+        cellData[selectedSheet][rowID][colID][property] = value;
+      } else {
+        cellData[selectedSheet][rowID][colID] = {};
+        cellData[selectedSheet][rowID][colID] = { ...defaultProperties };
+        cellData[selectedSheet][rowID][colID][property] = value;
+      }
+    } else {
+      cellData[selectedSheet][rowID] = {};
+      cellData[selectedSheet][rowID][colID] = { ...defaultProperties };
+      cellData[selectedSheet][rowID][colID][property] = value;
+    }
+    if (
+      canbeDefault &&
+      JSON.stringify(cellData[selectedSheet][rowID][colID]) ===
+        JSON.stringify(defaultProperties)
+    ) {
+      delete cellData[selectedSheet][rowID][colID];
+      if (Object.keys(cellData[selectedSheet][rowID]).length == 0) {
+        delete cellData[selectedSheet][rowID];
+      }
+    }
   });
+
+  console.log(cellData);
 }
