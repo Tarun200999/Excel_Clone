@@ -131,12 +131,30 @@ $(document).ready(() => {
     //interisting thing i have learnt today
   });
 
-  //Applying Text property , bold , italic, underline
+  //Applying Bold Property
   $(".icon-bold").click(function () {
     if ($(this).hasClass("selected")) {
       update_cell("font-weight", "bold");
     } else {
       update_cell("font-weight", "");
+    }
+  });
+
+  //Applying Italic Property
+  $(".icon-italic").click(function () {
+    if ($(this).hasClass("selected")) {
+      update_cell("font-style", "italic");
+    } else {
+      update_cell("font-style", "");
+    }
+  });
+
+  //Applying Underline Property
+  $(".icon-underline").click(function () {
+    if ($(this).hasClass("selected")) {
+      update_cell("text-decoration", "underline");
+    } else {
+      update_cell("text-decoration", "");
     }
   });
 });

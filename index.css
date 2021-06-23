@@ -180,6 +180,7 @@ body {
   border-right: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
   outline-color: #107c41;
+  padding-left: 5px;
 }
 
 .input_cell.selected {
