@@ -70,7 +70,7 @@ $(document).ready(() => {
     for (let j = 1; j <= 100; j++) {
       let colCod = $(`.colID-${j}`).attr("id").split("-")[1];
       row.append(
-        `<div class="input_cell" id="row-${i}-col-${j}" contenteditable="false" data="colCod-${colCod}"></div>`
+        `<div class="input_cell" id="row-${i}-col-${j}" contenteditable="false" data="rowCode-${i}-colCod-${colCod}"></div>`
       );
     }
     $(".input_container").append(row);
@@ -92,8 +92,7 @@ $(document).ready(() => {
   // Otherwise normal select
 
   $(".input_cell").click(function (e) {
-    console.log("Cell clicked");
-    // console.log(e);
+    //Logic for Multiple Select
     if (e.ctrlKey) {
       let [rowID, colID] = clicked_row_col(this);
 
@@ -107,8 +106,8 @@ $(document).ready(() => {
           $(`#row-${rowID}-col-${colID + 1}`).addClass("left_cell_selected");
         }
       }
+      //checking bottom cell
       if (rowID < 100) {
-        //checking bottom cell
         let bottom_cell_selected = $(`#row-${rowID + 1}-col-${colID}`).hasClass(
           "selected"
         );
@@ -117,7 +116,6 @@ $(document).ready(() => {
           $(`#row-${rowID + 1}-col-${colID}`).addClass("top_cell_selected");
         }
       }
-
       //Checking Top cell
 
       if (rowID > 1) {
@@ -129,9 +127,7 @@ $(document).ready(() => {
           $(`#row-${rowID - 1}-col-${colID}`).addClass("bottom_cell_selected");
         }
       }
-
       //Checking left cell
-
       if (colID > 1) {
         let left_cell_selected = $(`#row-${rowID}-col-${colID - 1}`).hasClass(
           "selected"
@@ -142,6 +138,8 @@ $(document).ready(() => {
         }
       }
     } else {
+      //When Only single cell is selected
+
       $(".input_cell.selected").removeClass("top_cell_selected");
       $(".input_cell.selected").removeClass("bottom_cell_selected");
       $(".input_cell.selected").removeClass("right_cell_selected");
@@ -149,8 +147,14 @@ $(document).ready(() => {
       $(".input_cell.selected").removeClass("selected");
     }
     $(this).addClass("selected");
-    applySelectedClass(this); //2 way selected
+    //Appyling cell prorperties in menu icons
+    applySelectedClass(this);
+    let [rowCod, cellCod] = getcellCode(this);
+    //Set content to Formula Input
+    $(".formula_editor.formula_input").text($(this).text());
+    $(".formula_editor.selected_cell").text(rowCod + cellCod);
   });
+  //Adding text to formula bar input and changing content on chnage
 
   //Making cell editable on DOUBLE click
   $(".input_cell").dblclick(function () {
@@ -227,6 +231,11 @@ function clicked_row_col(cell) {
   let rowID = parseInt(cellInfo[1]);
   let colID = parseInt(cellInfo[3]);
   return [rowID, colID];
+}
+
+function getcellCode(cell) {
+  let cellInfo = $(cell).attr("data").split("-");
+  return [cellInfo[1], cellInfo[3]];
 }
 
 function update_cell(property, value, canbeDefault) {

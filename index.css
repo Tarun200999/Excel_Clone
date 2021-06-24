@@ -105,6 +105,7 @@ body {
 }
 .selected_cell {
   width: 120px;
+  padding-left: 50px;
 }
 .formula_sign {
   width: 40px;
@@ -177,13 +178,14 @@ body {
 .input_cell {
   min-width: 100px;
   min-height: 25px;
+
   border-right: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
   outline-color: #107c41;
 }
 
 .input_cell.selected {
-  border: 2px solid #107c41;
+  border: 3px solid #107c41;
 }
 
 /* Multiple Cell selected CSS
