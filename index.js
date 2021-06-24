@@ -9,6 +9,7 @@ let defaultProperties = {
   "background-color": "white",
   color: "black",
   "font-size": 14,
+  "font-style": "",
 };
 //Global Object for storing cell of each sheet
 
@@ -94,7 +95,6 @@ $(document).ready(() => {
     console.log("Cell clicked");
     // console.log(e);
     if (e.ctrlKey) {
-      $(this).addClass("selected");
       let [rowID, colID] = clicked_row_col(this);
 
       //checking right cell
@@ -147,8 +147,9 @@ $(document).ready(() => {
       $(".input_cell.selected").removeClass("right_cell_selected");
       $(".input_cell.selected").removeClass("left_cell_selected");
       $(".input_cell.selected").removeClass("selected");
-      $(this).addClass("selected");
     }
+    $(this).addClass("selected");
+    applySelectedClass(this); //2 way selected
   });
 
   //Making cell editable on DOUBLE click
@@ -259,6 +260,34 @@ function update_cell(property, value, canbeDefault) {
       }
     }
   });
+  // console.log(cellData);
+}
 
-  console.log(cellData);
+function applySelectedClass(cell) {
+  // Function to appply selected class to icons according to the selected cell properties
+  let [rowID, colID] = clicked_row_col(cell);
+  let cellInfo = defaultProperties;
+  if (cellData[selectedSheet][rowID] && cellData[selectedSheet][rowID][colID]) {
+    cellInfo = cellData[selectedSheet][rowID][colID];
+  }
+
+  cellInfo["font-weight"]
+    ? $(".icon-bold").addClass("selected")
+    : $(".icon-bold").removeClass("selected");
+  cellInfo["font-style"]
+    ? $(".icon-italic").addClass("selected")
+    : $(".icon-italic").removeClass("selected");
+  cellInfo["text-decoration"]
+    ? $(".icon-underline").addClass("selected")
+    : $(".icon-underline").removeClass("selected");
+
+  let whichAlign = cellInfo["text-align"];
+  $(".align-icon.selected").removeClass("selected");
+  if (whichAlign == "right") {
+    $(".icon-align-right").addClass("selected");
+  } else if (whichAlign == "center") {
+    $(".icon-align-center").addClass("selected");
+  } else {
+    $(".icon-align-left").addClass("selected");
+  }
 }
