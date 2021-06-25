@@ -6,9 +6,9 @@ let defaultProperties = {
   "font-weight": "",
   "text-decoration": "",
   "text-align": "left",
-  "background-color": "white",
-  color: "black",
-  "font-size": 14,
+  "background-color": "#ffffff",
+  color: "#000000",
+  "font-size": "14px",
   "font-style": "",
 };
 //Global Object for storing cell of each sheet
@@ -152,15 +152,23 @@ $(document).ready(() => {
     let [rowCod, cellCod] = getcellCode(this);
     //Set content to Formula Input
     $(".formula_editor.formula_input").text($(this).text());
-    $(".formula_editor.selected_cell").text(rowCod + cellCod);
+    $(".formula_editor.selected_cell").text(cellCod + rowCod);
   });
-  //Adding text to formula bar input and changing content on chnage
 
   //Making cell editable on DOUBLE click
   $(".input_cell").dblclick(function () {
     console.log("Double clicked");
     $(this).attr("contenteditable", "true");
     $(this).focus();
+  });
+
+  //Adding text to formula bar input and changing content on chnage
+  $(".input_cell").keyup(function () {
+    $(".formula_editor.formula_input").text($(this).text());
+  });
+  //2 way change in formula Input bar on selected Cell
+  $(".formula_editor.formula_input").keyup(function () {
+    $(".input_cell.selected").text($(this).text());
   });
 
   //Making cell unselectable when focus gone
@@ -222,6 +230,32 @@ $(document).ready(() => {
       update_cell("text-align", "right", false);
     }
   });
+
+  //Clicking color picker on icon click
+
+  $(".color-fill-icon").click(function () {
+    $(".background-color-picker").click();
+  });
+
+  $(".color-text-icon").click(function () {
+    $(".text-color-picker").click();
+  });
+
+  //Background Color & Text color Change
+  $(".background-color-picker").change(function () {
+    update_cell("background-color", $(this).val(), true);
+  });
+  $(".text-color-picker").change(function () {
+    update_cell("color", $(this).val(), true);
+  });
+
+  $(".font_size_selector").change(function () {
+    update_cell("font-size", $(this).val(), true);
+  });
+  $(".font_family_selector").change(function () {
+    $(".font_family_selector").css("font-family", $(this).val());
+    update_cell("font-family", $(this).val(), true);
+  });
 });
 
 //Utility Functions
@@ -269,7 +303,7 @@ function update_cell(property, value, canbeDefault) {
       }
     }
   });
-  // console.log(cellData);
+  console.log(cellData);
 }
 
 function applySelectedClass(cell) {
@@ -279,7 +313,6 @@ function applySelectedClass(cell) {
   if (cellData[selectedSheet][rowID] && cellData[selectedSheet][rowID][colID]) {
     cellInfo = cellData[selectedSheet][rowID][colID];
   }
-
   cellInfo["font-weight"]
     ? $(".icon-bold").addClass("selected")
     : $(".icon-bold").removeClass("selected");
@@ -299,4 +332,12 @@ function applySelectedClass(cell) {
   } else {
     $(".icon-align-left").addClass("selected");
   }
+
+  $(".background-color-picker").val(cellInfo["background-color"]);
+  $(".text-color-picker").val(cellInfo["color"]);
+
+  $(".font_size_selector").val(cellInfo["font-size"]);
+
+  $(".font_family_selector").val(cellInfo["font-family"]);
+  $(".font_family_selector").css("font-family", cellInfo["font-family"]);
 }

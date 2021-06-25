@@ -9,11 +9,14 @@
 	<!--  last Time 1:28:00 EXCEL PART 1  Done -->
 	<!--  last Time 1:18:00 EXCEL PART 2 Done-->
 	<!--  last Time 0.30.0 EXCEL PART 3 Done-->
-	<!--  last Time 0.32.37 EXCEL PART 4 half-->
+	<!--  last Time 0.32.37 EXCEL PART 4 Done-->
+	
+	<!--  last Time 0.33.37 EXCEL PART 5 -->
+
 
 	<body>
 		<div class="container">
-			<div class="title_bar">Book 1 Excel</div>
+			<div class="title_bar">Book 1 Excel Clone</div>
 			<div class="menu_bar">
 				<div class="menu_file menu_item">File</div>
 				<div class="menu_home menu_item selected">Home</div>
@@ -26,28 +29,28 @@
 				<div class="material-icons menu-icon icon-copy">content_copy</div>
 				<div class="material-icons menu-icon icon-paste">content_paste</div>
 				<select class="selector font_family_selector">
-					<option style="font-family: Noto Sans;" value="Noto Sans">Noto Sans</option>
+					<option style="font-family: Noto Sans;" value="Noto Sans" selected>Noto Sans</option>
 					<option style="font-family:Arial" value="Arial">Arial</option>
 					<option style="font-family:Calibri" value="Calibri">Calibri</option>
 					<option style="font-family:Comic Sans MS" value="Comic Sans MS">Comic Sans MS</option>
 				
 				</select>
 				<select class="selector font_size_selector">
-					<option value="10">10</option>
-					<option value="10">12</option>
-					<option value="10">14</option>
-					<option value="10">16</option>
-					<option value="10">18</option>
-					<option value="10">20</option>
-					<option value="10">22</option>
-					<option value="10">24</option>
-					<option value="10">26</option>
-					<option value="10">30</option>
-					<option value="10">32</option>
-					<option value="10">33</option>
-					<option value="10">34</option>
-					<option value="10">36</option>
-					<option value="10">40</option>
+					<option value="10px">10</option>
+					<option value="12px">12</option>
+					<option value="14px" selected>14</option>
+					<option value="16px">16</option>
+					<option value="18px">18</option>
+					<option value="20px">20</option>
+					<option value="22px">22</option>
+					<option value="24px">24</option>
+					<option value="26px">26</option>
+					<option value="30px">30</option>
+					<option value="32px">32</option>
+					<option value="33px">33</option>
+					<option value="34px">34</option>
+					<option value="36px">36</option>
+					<option value="40px">40</option>
 				</select>
 				<div class="material-icons menu-icon icon-bold style-icon">format_bold</div>
 				<div class="material-icons menu-icon icon-italic style-icon">format_italic</div>
@@ -55,8 +58,15 @@
 				<div class="material-icons menu-icon icon-align-left align-icon selected">format_align_left</div>
 				<div class="material-icons menu-icon icon-align-center align-icon">format_align_center</div>
 				<div class="material-icons menu-icon icon-align-right align-icon">format_align_right</div>
-				<div class="material-icons menu-icon icon-color-fill">format_color_fill</div>
-				<div class="material-icons menu-icon icon-color-text">format_color_text</div>
+				<div class="menu-icon icon-color-fill">
+					<input type="color" class="color-picker background-color-picker"/>
+					<div class="material-icons color-fill-icon">format_color_fill</div>
+				</div>
+				<div class="menu-icon icon-color-text">
+					<input type="color" class="color-picker text-color-picker"/>
+					<div class="material-icons color-text-icon">format_color_text</div>
+				</div>
+				
 			</div>
 			<div class="formula_bar">
 				<div class="formula_editor selected_cell"></div>

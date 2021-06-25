@@ -83,6 +83,29 @@ body {
 .menu-icon.selected {
   background-color: lightgray;
 }
+.icon-color-fill,
+.icon-color-text {
+  position: relative;
+}
+.color-picker {
+  width: 30px;
+  height: 15px;
+  border: none;
+  outline: none;
+  position: absolute;
+  top: 25px;
+  padding: 0;
+  left: 5px;
+  cursor: pointer;
+  background-color: rgb(240, 235, 235);
+}
+.color-picker:hover {
+  background-color: lightgray;
+}
+
+.font_family_selector {
+  font-family: "Noto Sans";
+}
 
 /* FORMULA BAR */
 
@@ -178,14 +201,14 @@ body {
 .input_cell {
   min-width: 100px;
   min-height: 25px;
-
   border-right: 1px solid lightgray;
   border-bottom: 1px solid lightgray;
-  outline-color: #107c41;
+  font-size: 14px;
+  font-family: "Noto Sans";
 }
 
 .input_cell.selected {
-  border: 3px solid #107c41;
+  border: 1.8px solid #107c41;
 }
 
 /* Multiple Cell selected CSS
