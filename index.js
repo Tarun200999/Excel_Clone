@@ -281,11 +281,40 @@ $(document).ready(() => {
     $(".sheet_tab").click(function () {
       selectSheet(this);
     });
+    $(".sheet_tab").contextmenu(function (e) {
+      e.preventDefault();
+      console.log("Right Click on sheet name");
+      $(".container").append(`<div class="sheet_option_modal">
+      <div class="sheet_rename">Rename</div>
+      <div class="sheet_delete">Delete</div>
+    </div>
+      `);
+      $(".sheet_option_modal").css("left", e.pageX + "px");
+    });
   });
 
-  //Loading Old Sheet
+  //Loading Old Sheet in View
   $(".sheet_tab").click(function () {
     selectSheet(this);
+  });
+
+  //Showing Rename and delete Modal
+  $(".sheet_tab").contextmenu(function (e) {
+    e.preventDefault();
+    console.log("Right Click on sheet name");
+    if ($(".sheet_option_modal").length == 0) {
+      $(".container").append(`<div class="sheet_option_modal">
+     <div class="sheet_rename">Rename</div>
+     <div class="sheet_delete">Delete</div>
+     </div>
+    `);
+    }
+    $(".sheet_option_modal").css("left", e.pageX + "px");
+  });
+
+  //Hideing modal when click somewhere in container
+  $(".container").click(function () {
+    $(".sheet_option_modal").remove();
   });
 });
 

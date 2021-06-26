@@ -12,6 +12,7 @@ body {
 
 .container {
   height: 100vh;
+  position: relative;
 }
 
 /* TITLE BAR */
@@ -208,7 +209,7 @@ body {
 }
 
 .input_cell.selected {
-  border: 1.8px solid #107c41;
+  border: 2px solid #107c41;
 }
 
 /* Multiple Cell selected CSS
@@ -280,4 +281,41 @@ body {
 .sheet_tab:hover {
   cursor: pointer;
   background-color: lightgray;
+}
+/* SHeet option MOdal */
+.sheet_option_modal {
+  position: absolute;
+  bottom: 4vh;
+  background-color: white;
+  height: 60px;
+  width: 60px;
+  left: 50px;
+  border: 1px dotted black;
+}
+.sheet_rename,
+.sheet_delete {
+  height: 30px;
+  font-weight: 400;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sheet_rename:hover,
+.sheet_delete:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+/* Sheet Rename Modal */
+
+.sheet_rename_modal {
+  position: absolute;
+  height: 200px;
+  top: calc(100vh / 2 - 100px);
+  left: calc(100vw / 2 - 150px);
+  width: 300px;
+  background-color: white;
+  text-align: center;
+  box-shadow: 0 0 1px 2px lightgray;
 }
