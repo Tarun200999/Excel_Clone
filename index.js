@@ -16,20 +16,20 @@ let defaultProperties = {
 /*  Object is defined as 
 
    cellData={
-     sheet1:{
-          row1:{
-            col1:{
+     Sheet1:{
+          1:{
+            1:{
                properties of cell 
             },
-            col2:{
+            2:{
 
             }
           },
-          row2:{
+          2:{
 
           }
      },
-     sheet2:{
+     Sheet2:{
 
      }
    }
@@ -38,11 +38,18 @@ let defaultProperties = {
 let cellData = {
   Sheet1: {},
 };
-
 let selectedSheet = "Sheet1";
 let totalSheets = 1;
+lastaddedSheetNo = 1;
 
 //Using Jquery for Dealing with DOM
+$(document).bind("keydown", function (e) {
+  if (e.ctrlKey && e.which == 83) {
+    e.preventDefault();
+    console.log("Save Button Disabled");
+    return false;
+  }
+});
 
 $(document).ready(() => {
   //For column name code and row name
@@ -174,6 +181,7 @@ $(document).ready(() => {
   //Making cell unselectable when focus gone
   $(".input_cell").blur(function () {
     $(".input_cell.selected").attr("contenteditable", "false");
+    update_cell("text", $(this).text(), true);
   });
 
   //Making column and row scrabble with input container scroll
@@ -255,6 +263,29 @@ $(document).ready(() => {
   $(".font_family_selector").change(function () {
     $(".font_family_selector").css("font-family", $(this).val());
     update_cell("font-family", $(this).val(), true);
+  });
+
+  //Adding new Sheet by
+  $(".icon-add").click(function () {
+    $(".sheet_tab.selected").removeClass("selected");
+    emptySheet();
+    let sheetName = "Sheet" + (lastaddedSheetNo + 1);
+    cellData[sheetName] = {};
+    totalSheets += 1;
+    lastaddedSheetNo += 1;
+    selectedSheet = sheetName;
+    $(".sheet_tab_container").append(
+      `<div class="sheet_tab selected">${sheetName}</div>`
+    );
+    //Adding Event Listener to new sheet_tab
+    $(".sheet_tab").click(function () {
+      selectSheet(this);
+    });
+  });
+
+  //Loading Old Sheet
+  $(".sheet_tab").click(function () {
+    selectSheet(this);
   });
 });
 
@@ -340,4 +371,45 @@ function applySelectedClass(cell) {
 
   $(".font_family_selector").val(cellInfo["font-family"]);
   $(".font_family_selector").css("font-family", cellInfo["font-family"]);
+}
+
+function emptySheet() {
+  console.log("Empty Sheet Called");
+  let sheetInfo = cellData[selectedSheet];
+  for (let i of Object.keys(sheetInfo)) {
+    for (let j of Object.keys(sheetInfo[i])) {
+      let cell = $(`#row-${i}-col-${j}`);
+      cell.text("");
+      for (let k of Object.keys(defaultProperties)) {
+        cell.css(k, defaultProperties[k]);
+      }
+    }
+  }
+}
+function loadSheet() {
+  console.log("Load Sheet Called");
+  let sheetInfo = cellData[selectedSheet];
+  for (let i of Object.keys(sheetInfo)) {
+    for (let j of Object.keys(sheetInfo[i])) {
+      let cell = $(`#row-${i}-col-${j}`);
+      let cellInfo = sheetInfo[i][j];
+      cell.text(cellInfo["text"]);
+      for (let k of Object.keys(defaultProperties)) {
+        cell.css(k, cellInfo[k]);
+      }
+    }
+  }
+}
+
+function selectSheet(ele) {
+  console.log("Select Sheet clciked");
+  if (!$(ele).hasClass("selected")) {
+    $(".sheet_tab.selected").removeClass("selected");
+    $(ele).addClass("selected");
+    emptySheet();
+    selectedSheet = $(ele).text();
+    loadSheet();
+  } else {
+    return;
+  }
 }
