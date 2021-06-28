@@ -286,11 +286,10 @@ body {
 .sheet_option_modal {
   position: absolute;
   bottom: 4vh;
-  background-color: white;
+  background-color: whitesmoke;
   height: 60px;
-  width: 60px;
-  left: 50px;
-  border: 1px dotted black;
+  width: 100px;
+  border: 1px solid lightgrey;
 }
 .sheet_rename,
 .sheet_delete {
@@ -317,7 +316,7 @@ body {
   width: 300px;
   background-color: white;
   text-align: center;
-  box-shadow: 0 0 1px 2px #107c41;
+  border: 1px solid #107c41;
   border-radius: 5px;
 }
 .action_buttons {
@@ -337,25 +336,63 @@ body {
   color: white;
   cursor: pointer;
   border-radius: 5px;
+  border: 1px solid green;
 }
 .cancel_button {
-  background-color: white;
+  background-color: red;
   border: 1px solid red;
   padding: 5px;
   cursor: pointer;
   border-radius: 5px;
+  color: whitesmoke;
 }
 .rename_button:hover {
   background-color: lightgray;
   color: black;
 }
 .cancel_button:hover {
-  background-color: red;
-  color: white;
+  background-color: lightgrey;
+  color: black;
 }
 
 .new_sheet_name {
   border: 1px solid #107c41;
   height: 30px;
   padding: 5px;
+  border-radius: 5px;
+}
+
+/* Alert Show Modal*/
+.alert_show_modal {
+  width: 300px;
+  height: 100px;
+  position: absolute;
+  top: calc(15vh);
+  left: calc(100vw / 2 - 150px);
+  background-color: whitesmoke;
+  border: 1px solid lightgreen;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.alert_submit_button {
+  border: 1px solid #107c41;
+  margin-top: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: lightgreen;
+  font-size: 16px;
+  cursor: pointer;
+}
+.alert_submit_button:hover {
+  background-color: lightgrey;
+  border: 1px solid black;
+}
+.alert_content {
+  align-items: center;
+  font-family: "Times New Roman", Times, serif;
 }

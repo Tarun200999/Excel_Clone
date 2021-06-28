@@ -269,10 +269,9 @@ $(document).ready(() => {
   $(".icon-add").click(function () {
     $(".sheet_tab.selected").removeClass("selected");
     emptySheet();
-    let sheetName = "Sheet" + (lastaddedSheetNo + 1);
+    let sheetName = "Sheet" + (totalSheets + 1);
     cellData[sheetName] = {};
     totalSheets += 1;
-    lastaddedSheetNo += 1;
     selectedSheet = sheetName;
     $(".sheet_tab_container").append(
       `<div class="sheet_tab selected">${sheetName}</div>`
@@ -281,8 +280,21 @@ $(document).ready(() => {
     $(".sheet_tab").click(function () {
       selectSheet(this);
     });
+    sheetRename_delete_events();
+  });
+
+  //Loading Old Sheet in View
+  $(".sheet_tab").click(function () {
+    console.log("Sheet Clicked");
+    selectSheet(this);
+  });
+
+  //Showing Rename and delete Modal
+
+  function sheetRename_delete_events() {
     $(".sheet_tab.selected").contextmenu(function (e) {
       e.preventDefault();
+      selectSheet(this);
       console.log("Right Click on sheet name");
       if ($(".sheet_option_modal").length === 0) {
         $(".container").append(`<div class="sheet_option_modal">
@@ -294,7 +306,7 @@ $(document).ready(() => {
           console.log("rename clicked");
           $(".container").append(`<div class="sheet_rename_modal">
             <h4 class="rename_modal_title">Rename Sheet</h4>
-            <input type="text" class="new_sheet_name" placeholder="Sheet name"/>
+            <input type="text" class="new_sheet_name" placeholder="Sheet name" value="${selectedSheet}"/>
             <div class="action_buttons">
               <div class="rename_button">Rename</div>
               <div class="cancel_button">Cancel</div>
@@ -307,67 +319,68 @@ $(document).ready(() => {
             let newSheetName = $(".new_sheet_name").val();
             console.log(newSheetName);
             $(".sheet_tab.selected").text(newSheetName);
-            cellData[newSheetName] = cellData[selectedSheet];
-            delete cellData[selectedSheet];
+            let newCelldata = {};
+            for (let key in cellData) {
+              if (key != selectedSheet) {
+                newCelldata[key] = cellData[key];
+              } else {
+                newCelldata[newSheetName] = cellData[key];
+              }
+            }
+            cellData = newCelldata;
             selectedSheet = newSheetName;
             $(".sheet_rename_modal").remove();
+            console.log(cellData);
           });
         });
-        $(".sheet_delete").click(function () {});
+        $(".sheet_delete").click(function () {
+          if (Object.keys(cellData).length > 1) {
+            let currSheet = $(".sheet_tab.selected");
+            let currSheetName = selectedSheet;
+            let sheetIndex = Object.keys(cellData).indexOf(selectedSheet);
+            if (sheetIndex == 0) {
+              $(".sheet_tab.selected").next().click();
+            } else {
+              $(".sheet_tab.selected").prev().click();
+            }
+            $(currSheet).remove();
+            delete cellData[currSheetName];
+            totalSheets -= 1;
+          } else {
+            $(".container").append(`<div class="alert_show_modal">
+            <div class="alert_content">${"Sorry, Not Possible"}</div>
+            <div class="alert_submit_button">Ok</div>
+          </div>`);
+            $(".alert_submit_button").click(function () {
+              $(".alert_show_modal").remove();
+            });
+          }
+        });
       }
       $(".sheet_option_modal").css("left", e.pageX + "px");
     });
-  });
+  }
 
-  //Loading Old Sheet in View
-  $(".sheet_tab").click(function () {
-    console.log("Sheet Clicked");
-    selectSheet(this);
-  });
-
-  //Showing Rename and delete Modal
-
-  $(".sheet_tab.selected").contextmenu(function (e) {
-    e.preventDefault();
-    console.log("Right Click on sheet name");
-    if ($(".sheet_option_modal").length === 0) {
-      $(".container").append(`<div class="sheet_option_modal">
-     <div class="sheet_rename">Rename</div>
-     <div class="sheet_delete">Delete</div>
-     </div>
-    `);
-      $(".sheet_rename").click(function () {
-        console.log("rename clicked");
-        $(".container").append(`<div class="sheet_rename_modal">
-          <h4 class="rename_modal_title">Rename Sheet</h4>
-          <input type="text" class="new_sheet_name" placeholder="Sheet name"/>
-          <div class="action_buttons">
-            <div class="rename_button">Rename</div>
-            <div class="cancel_button">Cancel</div>
-          </div>
-        </div>`);
-        $(".cancel_button").click(function () {
-          $(".sheet_rename_modal").remove();
-        });
-        $(".rename_button").click(function () {
-          let newSheetName = $(".new_sheet_name").val();
-          console.log(newSheetName);
-          $(".sheet_tab.selected").text(newSheetName);
-          cellData[newSheetName] = cellData[selectedSheet];
-          delete cellData[selectedSheet];
-          selectedSheet = newSheetName;
-          $(".sheet_rename_modal").remove();
-          console.log(cellData);
-        });
-      });
-      $(".sheet_delete").click(function () {});
-    }
-    $(".sheet_option_modal").css("left", e.pageX + "px");
-  });
+  sheetRename_delete_events(); //To add Sheet rename delete modal and events
 
   //Hideing modal when click somewhere in container
   $(".container").click(function () {
     $(".sheet_option_modal").remove();
+  });
+
+  //Scroller Left and Right
+
+  $(".icon-left-scroll").click(function () {
+    let sheetIndex = Object.keys(cellData).indexOf(selectedSheet);
+    if (sheetIndex != 0) {
+      $(".sheet_tab.selected").prev().click();
+    }
+  });
+  $(".icon-right-scroll").click(function () {
+    let sheetIndex = Object.keys(cellData).indexOf(selectedSheet);
+    if (sheetIndex != totalSheets - 1) {
+      $(".sheet_tab.selected").next().click();
+    }
   });
 });
 
