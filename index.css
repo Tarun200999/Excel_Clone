@@ -107,6 +107,9 @@ body {
 .font_family_selector {
   font-family: "Noto Sans";
 }
+.font_size_selector {
+  margin-left: 15px;
+}
 
 /* FORMULA BAR */
 

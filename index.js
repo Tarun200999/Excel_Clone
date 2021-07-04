@@ -382,6 +382,52 @@ $(document).ready(() => {
       $(".sheet_tab.selected").next().click();
     }
   });
+
+  //Speech To Text API configration
+
+  $(".icon-voice-input").click(function () {
+    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+    var recognition = new SpeechRecognition();
+    recognition.onstart = function () {
+      console.log("We are listening. Try speaking into the microphone.");
+    };
+    recognition.onspeechend = function () {
+      $(".icon-voice-input.selected").removeClass("selected");
+      recognition.stop();
+    };
+    recognition.onresult = function (event) {
+      var transcript = event.results[0][0].transcript;
+      update_cell("text", transcript, true);
+      $(".input_cell.selected").each(function () {
+        $(this).text(transcript);
+      });
+    };
+    if (!$(this).hasClass("selected")) {
+      $(this).addClass("selected");
+      recognition.start();
+    }
+  });
+
+  //Text To speech API added
+
+  $(".icon-speaker-output").click(function () {
+    let speech = new SpeechSynthesisUtterance();
+    speech.lang = "en";
+
+    $(this).addClass("selected");
+    let text_to_speech = [];
+    $(".input_cell.selected").each(function () {
+      text_to_speech.push($(this).text());
+    });
+    console.log("data to speak ", text_to_speech);
+    for (var i = 0; i < text_to_speech.length; i++) {
+      speech.text = text_to_speech[i];
+      console.log("i", i);
+      window.speechSynthesis.speak(speech);
+    }
+
+    $(this).removeClass("selected");
+  });
 });
 
 //Utility Functions
