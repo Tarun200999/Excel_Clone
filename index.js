@@ -170,9 +170,37 @@ $(document).ready(() => {
   });
 
   //Adding text to formula bar input and changing content on chnage
-  $(".input_cell").keyup(function (event) {
-    console.log(event);
-    if (event.keyCode == 46) {
+  $(".input_cell").keyup(function (e) {
+    //console.log(e);
+
+    if ((e.key == "i" || e.key == "I") && e.ctrlKey) {
+      console.log("CTRL I");
+      if ($(".icon-italic").hasClass("selected")) {
+        update_cell("font-style", "", false);
+      } else {
+        update_cell("font-style", "italic", true);
+      }
+      $(".icon-italic").toggleClass("selected");
+    }
+    if ((e.key == "u" || e.key == "U") && e.ctrlKey) {
+      console.log("CTRL U");
+      if ($(".icon-underline").hasClass("selected")) {
+        update_cell("text-decoration", "", false);
+      } else {
+        update_cell("text-decoration", "underline", false);
+      }
+      $(".icon-underline").toggleClass("selected");
+    }
+    if ((e.key == "b" || e.key == "B") && e.ctrlKey) {
+      console.log("CTRL B");
+      if ($(".icon-bold").hasClass("selected")) {
+        update_cell("font-weight", "", false);
+      } else {
+        update_cell("font-weight", "bold", false);
+      }
+      $(".icon-bold").toggleClass("selected");
+    }
+    if (e.keyCode == 46) {
       update_cell("text", "", true);
       $(".input_cell.selected").text("");
     }
