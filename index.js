@@ -170,9 +170,15 @@ $(document).ready(() => {
   });
 
   //Adding text to formula bar input and changing content on chnage
-  $(".input_cell").keyup(function () {
+  $(".input_cell").keyup(function (event) {
+    console.log(event);
+    if (event.keyCode == 46) {
+      update_cell("text", "", true);
+      $(".input_cell.selected").text("");
+    }
     $(".formula_editor.formula_input").text($(this).text());
   });
+
   //2 way change in formula Input bar on selected Cell
   $(".formula_editor.formula_input").keyup(function () {
     $(".input_cell.selected").text($(this).text());
