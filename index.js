@@ -42,16 +42,26 @@ let selectedSheet = "Sheet1";
 let totalSheets = 1;
 lastaddedSheetNo = 1;
 
+window.onload = function () {
+  console.log("After load");
+  $(".waiting_window").fadeTo(1000, 0.08, function () {
+    $(this).slideUp(150, function () {
+      $(this).remove();
+    });
+  });
+};
+
 //Using Jquery for Dealing with DOM
-$(document).bind("keydown", function (e) {
-  if (e.ctrlKey && e.which == 83) {
-    e.preventDefault();
-    console.log("Save Button Disabled");
-    return false;
-  }
-});
 
 $(document).ready(() => {
+  //Disabled Save button
+  $(document).bind("keydown", function (e) {
+    if (e.ctrlKey && e.which == 83) {
+      e.preventDefault();
+      console.log("Save Button Disabled");
+      return false;
+    }
+  });
   //For column name code and row name
   for (let i = 1; i <= 100; i++) {
     let ans = "";
