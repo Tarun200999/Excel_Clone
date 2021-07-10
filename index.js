@@ -11,6 +11,9 @@ let defaultProperties = {
   "font-size": "14px",
   "font-style": "",
 };
+
+let allwords = [];
+
 //Global Object for storing cell of each sheet
 
 /*  Object is defined as 
@@ -214,6 +217,34 @@ $(document).ready(() => {
       update_cell("text", "", true);
       $(".input_cell.selected").text("");
     }
+    var result = [];
+    var word = $(this).text();
+    for (var j = 0; j < allwords.length; j++) {
+      if (allwords[j].startsWith(word) && word.length != "") {
+        result.push(allwords[j]);
+      }
+    }
+    result.sort();
+    // console.log(result);
+    $(".suggested_words").remove();
+    let position = $(this).position();
+    $(".container").append(`<div class="suggested_words"></div>`);
+    let limitofwords = result.length > 5 ? 5 : result.length;
+    for (var i = 0; i < limitofwords; i++) {
+      $(".suggested_words").append(`<h6 class="each_words">${result[i]}</h6>`);
+      $(".each_words").click(function (e) {
+        // console.log("All words on click", allwords);
+        allwords.pop();
+        //  console.log("All words on click", allwords);
+
+        $(".input_cell.selected").text($(this).text());
+        update_cell("text", $(this).text(), true);
+      });
+    }
+    $(".suggested_words").css({
+      left: position.left + "px",
+      top: position.top + 25 + "px",
+    });
     $(".formula_editor.formula_input").text($(this).text());
   });
 
@@ -225,6 +256,8 @@ $(document).ready(() => {
   //Making cell unselectable when focus gone
   $(".input_cell").blur(function () {
     $(".input_cell.selected").attr("contenteditable", "false");
+    if ($(this).text().length > 0) allwords.push($(this).text());
+    allwords = Array.from(new Set(allwords));
     update_cell("text", $(this).text(), true);
   });
 
@@ -232,6 +265,7 @@ $(document).ready(() => {
   $(".input_container").scroll(function () {
     //console.log(this.scrollLeft); //This will give how many px we have scroll in horizontal direction
     //The pixel we are scrolling column name
+    $(".suggested_words").remove();
     $(".column_name_container").scrollLeft(this.scrollLeft);
     // console.log(this.scrollTop);
     $(".row_name_container").scrollTop(this.scrollTop);
@@ -410,6 +444,7 @@ $(document).ready(() => {
   //Hideing modal when click somewhere in container
   $(".container").click(function () {
     $(".sheet_option_modal").remove();
+    $(".suggested_words").remove();
   });
 
   //Scroller Left and Right
@@ -441,6 +476,7 @@ $(document).ready(() => {
     };
     recognition.onresult = function (event) {
       var transcript = event.results[0][0].transcript;
+      allwords.push(transcript);
       update_cell("text", transcript, true);
       $(".input_cell.selected").each(function () {
         $(this).text(transcript);
@@ -456,7 +492,7 @@ $(document).ready(() => {
 
   $(".icon-speaker-output").click(function () {
     let speech = new SpeechSynthesisUtterance();
-    speech.lang = "en";
+    speech.lang = "en-IN";
 
     $(this).addClass("selected");
     let text_to_speech = [];
@@ -519,7 +555,7 @@ function update_cell(property, value, canbeDefault) {
       }
     }
   });
-  console.log(cellData);
+  // console.log(cellData);
 }
 
 function applySelectedClass(cell) {

@@ -429,3 +429,27 @@ body {
   width: 300px;
   border-radius: 10px;
 }
+
+/* Suggestions card */
+.suggested_words {
+  position: absolute;
+  display: flex;
+
+  background-color: white;
+  width: auto;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
+.each_words {
+  background-color: white;
+  border-bottom: 1px solid whitesmoke;
+  padding: 5px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin: 4px;
+  border-radius: 5px;
+  box-shadow: 0 0 1px 1px lightgray;
+  font-weight: 300;
+  font-style: oblique;
+  cursor: pointer;
+}
