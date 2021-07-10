@@ -506,6 +506,7 @@ $(document).ready(() => {
     recognition.onresult = function (event) {
       var transcript = event.results[0][0].transcript;
       allwords.push(transcript);
+      console.log(transcript);
       update_cell("text", transcript, true);
       $(".input_cell.selected").each(function () {
         $(this).text(transcript);
@@ -531,7 +532,7 @@ $(document).ready(() => {
     console.log("data to speak ", text_to_speech);
     for (var i = 0; i < text_to_speech.length; i++) {
       speech.text = text_to_speech[i];
-      console.log("i", i);
+      //console.log("i", i);
       window.speechSynthesis.speak(speech);
     }
 
