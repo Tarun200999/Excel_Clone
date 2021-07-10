@@ -85,7 +85,7 @@ body {
 
 .selector {
   height: 25px;
-  font-size: 18px;
+  font-size: 15px;
   width: 150px;
 }
 
@@ -436,6 +436,10 @@ body {
 .window_content img {
   width: 300px;
   border-radius: 10px;
+}
+.image_window {
+  display: flex;
+  flex-direction: column;
 }
 
 /* Suggestions card */
