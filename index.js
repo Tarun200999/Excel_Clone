@@ -250,7 +250,7 @@ $(document).ready(() => {
       $(".input_cell.selected").text("");
     }
     var result = [];
-    var word = $(this).text();
+    var word = $(this).text().toLowerCase();
     for (var j = 0; j < allwords.length; j++) {
       if (allwords[j].startsWith(word) && word.length != "") {
         result.push(allwords[j]);
@@ -265,10 +265,7 @@ $(document).ready(() => {
     for (var i = 0; i < limitofwords; i++) {
       $(".suggested_words").append(`<h6 class="each_words">${result[i]}</h6>`);
       $(".each_words").click(function (e) {
-        // console.log("All words on click", allwords);
         allwords.pop();
-        //  console.log("All words on click", allwords);
-
         $(".input_cell.selected").text($(this).text());
         update_cell("text", $(this).text(), true);
       });
@@ -288,7 +285,7 @@ $(document).ready(() => {
   //Making cell unselectable when focus gone
   $(".input_cell").blur(function () {
     $(".input_cell.selected").attr("contenteditable", "false");
-    if ($(this).text().length > 0) allwords.push($(this).text());
+    if ($(this).text().length > 0) allwords.push($(this).text().toLowerCase());
     allwords = Array.from(new Set(allwords));
     update_cell("text", $(this).text(), true);
   });
