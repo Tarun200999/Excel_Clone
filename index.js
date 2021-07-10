@@ -175,12 +175,44 @@ $(document).ready(() => {
     $(".formula_editor.selected_cell").text(cellCod + rowCod);
   });
 
-  //Making cell editable on DOUBLE click
-  $(".input_cell").dblclick(function () {
-    console.log("Double clicked");
-    $(this).attr("contenteditable", "true");
-    $(this).focus();
+  // //Making cell editable on DOUBLE click
+  // $(".input_cell").dblclick(function () {
+  //   console.log("Double clicked");
+  //   $(this).attr("contenteditable", "true");
+  //   $(this).focus();
+  // });
+
+  var touchtime = 0;
+  $(".input_cell").on("click", function () {
+    if (touchtime == 0) {
+      touchtime = new Date().getTime();
+    } else {
+      // compare first click to this click and see if they occurred within double click threshold
+      if (new Date().getTime() - touchtime < 800) {
+        console.log("Double clicked");
+        $(this).attr("contenteditable", "true");
+        $(this).focus();
+        touchtime = 0;
+      } else {
+        // not a double click so set as a new first click
+        touchtime = new Date().getTime();
+      }
+    }
   });
+  // $(".input_cell").on({
+  //   dblclick: function () {
+  //     //do stuff
+  //     console.log("Double clicked");
+  //     $(this).attr("contenteditable", "true");
+  //     $(this).focus();
+  //   },
+  //   touch: function () {
+  //     //do the same stuff
+  //     console.log("Double clicked");
+  //     $(this).attr("contenteditable", "true");
+  //     $(this).focus();
+  //   },
+  // });
 
   //Adding text to formula bar input and changing content on chnage
   $(".input_cell").keyup(function (e) {

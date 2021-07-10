@@ -32,6 +32,10 @@ body {
   height: 5vh;
   background-color: #105c41;
   display: flex;
+  overflow: scroll;
+}
+.menu_bar::-webkit-scrollbar {
+  display: none;
 }
 .menu_item {
   padding-right: 10px;
@@ -60,6 +64,10 @@ body {
   height: 6vh;
   display: flex;
   align-items: center;
+  overflow: scroll;
+}
+.menu_icon_bar::-webkit-scrollbar {
+  display: none;
 }
 
 .menu-icon {
